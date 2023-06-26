@@ -1,0 +1,1283 @@
+{
+	"info": {
+		"_postman_id": "44d1a438-4064-42da-bcaf-98db9c2349d1",
+		"name": "TNSR collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27730359",
+		"_collection_link": "https://winter-shuttle-425845.postman.co/workspace/My-Workspace~e7ffb354-8e14-4af4-8627-f2821ddb3490/collection/27730359-44d1a438-4064-42da-bcaf-98db9c2349d1?action=share&creator=27730359&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "ACL (host)",
+			"item": [
+				{
+					"name": "get ACL (host) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-acl:host-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-acl:host-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put ACL (host) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-host-acl:host-config\": {\n        \"security\": {\n            \"host-acls\": {\n                \"host-acl\": [\n                    {\n                        \"acl-name\": \"tnsrids\",\n                        \"acl-seq\": 10,\n                        \"description\": \"TNSR IDS\",\n                        \"acl-rule\": [\n                            {\n                                \"rule-seq\": 100,\n                                \"description\": \"Pass to tnsrids\",\n                                \"packet-match\": {\n                                    \"ip\": {\n                                        \"version\": 4,\n                                        \"protocol\": \"tcp\",\n                                        \"source\": \"203.0.113.54/32\",\n                                        \"transport\": {\n                                            \"destination-port\": {\n                                                \"first\": 12345\n                                            }\n                                        }\n                                    }\n                                },\n                                \"action\": \"permit\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-acl:host-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-acl:host-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACL (standart)",
+			"item": [
+				{
+					"name": "get ACL (standart) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-acl:acl-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put ACL (standart) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-acl:acl-config\": {\n        \"acl-table\": {\n            \"acl-list\": [\n                {\n                    \"acl-name\": \"blockssh\",\n                    \"acl-rules\": {\n                        \"acl-rule\": [\n                            {\n                                \"sequence\": 10,\n                                \"action\": \"deny\",\n                                \"ip-version\": \"ipv4\",\n                                \"dst-ip-prefix\": \"203.0.133.2/32\",\n                                \"dst-first-port\": 22,\n                                \"dst-last-port\": 22,\n                                \"protocol\": \"tcp\"\n                            }, \n                            {\n                                \"sequence\": 20,\n                                \"action\": \"permit\",\n                                \"ip-version\": \"ipv4\"\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-acl:acl-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get ACL (standart) table",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config/acl-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-acl:acl-config",
+								"acl-table"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BFD",
+			"item": [
+				{
+					"name": "get BFD config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post bfd config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-bfd:bfd-config\": {\n        \"key-table\": {\n            \"key-entry\": [\n                {\n                    \"conf-key-id\": 123456789,\n                    \"type\": \"meticulous-keyed-sha1\",\n                    \"secret\": \"4a40369b4df32ed0652b548400\"\n                }\n            ]\n        },\n        \"bfd-table\": {\n            \"bfd-session\": [\n                {\n                    \"name\": \"R1_R2\",\n                    \"interface\": \"GigabitEthernet0/4/0\",\n                    \"local-ip-address\": \"10.1.1.1\",\n                    \"peer-ip-address\": \"10.1.1.2\",\n                    \"desired-min-tx\": 1000000,\n                    \"required-min-rx\": 1000000,\n                    \"detect-multiplier\": 3,\n                    \"bfd-key-id\": 123,\n                    \"conf-key-id\": 123456789,\n                    \"enable\": true,\n                    \"delayed\": true\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get BFD table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/bfd-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"bfd-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post BFD table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-bfd:bfd-table\": {\n        \"bfd-session\": [\n            {\n                \"name\": \"R1_R2\",\n                \"interface\": \"GigabitEthernet0/4/0\",\n                \"local-ip-address\": \"10.1.1.1\",\n                \"peer-ip-address\": \"10.1.1.2\",\n                \"desired-min-tx\": 1000000,\n                \"required-min-rx\": 1000000,\n                \"detect-multiplier\": 3,\n                \"bfd-key-id\": 123,\n                \"conf-key-id\": 123456789,\n                \"enable\": true,\n                \"delayed\": true\n            }\n        ]\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/bfd-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"bfd-table"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BGP",
+			"item": [
+				{
+					"name": "BGP clear",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bgp:input\": {\n    \"peer\": \"*\",\n    \"soft\": false,\n    \"vrf-id\": \"default\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-bgp:bgp-clear",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-bgp:bgp-clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BGP status",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.json())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bgp:input\": [\n    {\n      \"request\": \"neighbors\",\n      \"family\": \"ipv4\",\n      \"vrf-id\": \"default\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-bgp:bgp-show",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-bgp:bgp-show"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "interface",
+			"item": [
+				{
+					"name": "get int config ipv4 (single interface)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-interface:interfaces-config/netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0/ipv4/address",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-interface:interfaces-config",
+								"netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0",
+								"ipv4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put int config ipv4 (single interface)",
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-interface:address\": {\n      \"ip\": \"{{ipv4}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-interface:interfaces-config/netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0/ipv4/address",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-interface:interfaces-config",
+								"netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0",
+								"ipv4",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get int config ipv6 (single int)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-interface:interfaces-config/netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0/ipv6/address",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-interface:interfaces-config",
+								"netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0",
+								"ipv6",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put int config ipv6 (single interface)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-interface:address\": {\n        \"ip\": [\n            \"{{ipv6}}\"\n        ]\n    }\n}\n"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-interface:interfaces-config/netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0/ipv6/address",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-interface:interfaces-config",
+								"netgate-interface:interface=TwoDotFiveGigabitEthernet2%2F0%2F0",
+								"ipv6",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get interface state",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-interface:interfaces-state",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-interface:interfaces-state"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Host interface",
+			"item": [
+				{
+					"name": "get host interface",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put host interface",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-host-interface:host-if-config\": {\n        \"interface\": [\n            {\n                \"name\": \"enp1s0\",\n                \"description\": \"descpription\",\n                \"enabled\": true,\n                \"ipv4\": {\n                    \"dhcp-client\": {\n                        \"enabled\": true\n                    }\n                }\n            }\n        ]\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OSPF",
+			"item": [
+				{
+					"name": "show OSPF status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ospf:input\": {\n    \"request\": \"config\",\n    \"param\": \"asbr-summary\",\n    \"vrf-id\": \"default\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-ospf:ospf-show",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-ospf:ospf-show"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OSPF-6",
+			"item": [
+				{
+					"name": "show OSPF6 status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ospf6:input\": {\n    \"request\": \"config\",\n    //\"param\": \"asbr-summary\",\n    \"vrf-id\": \"default\"\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-ospf6:ospf6-show",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-ospf6:ospf6-show"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route",
+			"item": [
+				{
+					"name": "get route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-route:route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-route:route-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-route:route-config\": {\n    \"dynamic\": {\n      \"netgate-bgp:bgp\": {\n        \"global-options\": {\n          \"enable\": true\n        },\n        \"routers\": {\n          \"router\": [\n            {\n              \"vrf-id\": \"default\",\n              \"asn\": 65000,\n              \"neighbors\": {\n                \"neighbor\": [\n                  {\n                    \"peer\": \"10.10.10.10\",\n                    \"remote-asn\": 65001\n                  }\n                ]\n              }\n            }\n          ]\n        }\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-route:route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-route:route-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Route Table",
+			"item": [
+				{
+					"name": "get route table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-route-table:route-table-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-route-table:route-table-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post route table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-route-table:route-table-config\": {\n      \"static-routes\": {\n         \"route-table\": [\n            {\n               \"name\": \"ipv4-VRF:0\",\n               \"id\": 0,\n               \"ipv4-routes\": {\n                  \"route\": [\n                     {\n                        \"destination-prefix\": \"10.2.10.0/24\",\n                        \"next-hop\": {\n                           \"hop\": [\n                              {\n                                 \"hop-id\": 0,\n                                 \"ipv4-address\": \"10.2.0.2\"\n                              }\n                           ]\n                        }\n                     }\n                  ]\n               }\n            },\n            {\n               \"name\": \"ipv6-VRF:0\",\n               \"id\": 0,\n               \"ipv6-routes\": {\n                  \"route\": [\n                     {\n                        \"destination-prefix\": \"fc07:b337:c4f3::/48\",\n                        \"next-hop\": {\n                           \"hop\": [\n                              {\n                                 \"hop-id\": 0,\n                                 \"ipv6-address\": \"2001:db8:1::2\"\n                              }\n                           ]\n                        }\n                     }\n                  ]\n               }\n            }\n         ]\n      }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-route-table:route-table-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-route-table:route-table-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
