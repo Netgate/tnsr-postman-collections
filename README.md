@@ -29,7 +29,8 @@ TNSR also has cert-based authentication which is more secure and can be set up i
 Follow these steps to setup Postman:
 
 1. Download and install the desktop app at [Download Postman | Get Started for Free](https://www.postman.com/downloads/). Create a free Postman account to use the app.
-//change the link to github
-2. Clone a [repository](https://gitlab.netgate.com/mukhamediev/tnsr-postman-collections/-/tree/main) and download TNSR <span style="color: orange;">collections.postman_collection.json</span> and TNSR-enviroment.postman_environment.json files. 
+
+2. Clone a [repository](https://gitlab.netgate.com/mukhamediev/tnsr-postman-collections/-/tree/main) and download TNSR collections.postman_collection.json and TNSR-enviroment.postman_environment.json files. 
+
 3. 
 
