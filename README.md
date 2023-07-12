@@ -24,6 +24,8 @@ starting from TNSR release 23.06
 
 TNSR also has cert-based authentication which is more secure and can be set up in Postman (out of scope of this document). For more details please refer to this [documentation](https://docs.netgate.com/tnsr/en/latest/recipes/restconf-pki-nacm/index.html). 
 
+<hr/>
+
 Follow these steps to setup Postman:
 
 1. Download and install the desktop app at [Download Postman | Get Started for Free](https://www.postman.com/downloads/). Create a free Postman account to use the app.
