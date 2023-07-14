@@ -34,8 +34,8 @@ Follow these steps to setup Postman:
 
 3. Import TNSR collections.postman_collection.json and TNSR-enviroment.postman_environment.json to “My Workspace” in Postman. “My Workspace” can be accessed from Workspaces → My Workspace in the header.
 
-[Postman Workspaces](Images/postman_workspaces.png)
-
-.
+<p>
+    [Postman Workspaces](Images/postman_workspaces.png)
+</p>
 
 [Postman Workspaces Import Files](Images/postman_workspaces_import.png)
