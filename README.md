@@ -8,7 +8,7 @@ You can edit the variables in the enviroment to point to your own TNSR device. F
 
 Setup TNSR before the Postman setup:
 
-``` pki generate-restconf-certs ``` command minimum required TNSR version release 23.06
+``` pki generate-restconf-certs ``` command was introduced in TNSR version 23.06. Minimum required TNSR version release 23.06.
 
 ```
 
