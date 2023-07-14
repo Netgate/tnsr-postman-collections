@@ -30,8 +30,10 @@ Follow these steps to setup Postman:
 
 1. Download and install the desktop app at [Download Postman | Get Started for Free](https://www.postman.com/downloads/). Create a free Postman account to use the app.
 
-2. Clone a [repository](https://gitlab.netgate.com/mukhamediev/tnsr-postman-collections/-/tree/main) and download TNSR collections.postman_collection.json and TNSR-enviroment.postman_environment.json files. 
+2. Clone a TNSR Postman Collections repository and download TNSR collections.postman_collection.json and TNSR-enviroment.postman_environment.json files. 
 
 3. Import TNSR collections.postman_collection.json and TNSR-enviroment.postman_environment.json to “My Workspace” in Postman. “My Workspace” can be accessed from Workspaces → My Workspace in the header.
 
-![Postman Workspaces](Images/postman_workspaces.png)
+[Postman Workspaces](Images/postman_workspaces.png)
+
+[Postman Workspaces Import Files](Images/postman_workspaces_import.png)
