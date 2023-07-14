@@ -57,7 +57,9 @@ Follow these steps to setup Postman:
 ![Postman Environment value chage](Images/postman_environment_value_change.png)
 
 Variable descriptions and uses:
+
 host - contains the IP address of TNSR installation, used in the URL fields
+
 ipv4 - contains IPv4 address of TNSR installation, used in the body of PUT requests
 
 ![Postman IPv4 body](Images/postman_ipv4_body.png)
@@ -81,5 +83,7 @@ peer_ip - contains the IP address of the peer, used in the body of PUT requests
 ![Postman send a request](Images/postman_send_request.png)
 
 Examples:
+
 GET request - press the Send button and receive the output body 
+
 PUT request - edit the input body and press the Send button to make a change
