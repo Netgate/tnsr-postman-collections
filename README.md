@@ -7,6 +7,7 @@ You can edit the variables in the enviroment to point to your own TNSR device. F
 ## Setup
 
 Setup TNSR before the Postman setup:
+
 minimum required TNSR version release 23.06
 
 ```
