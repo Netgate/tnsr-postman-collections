@@ -36,4 +36,3 @@ Follow these steps to setup Postman:
 
 [Postman Workspaces](Images/postman_workspaces.png)
 
-[Postman Workspaces Import Files](Images/postman_workspaces_import.png)
