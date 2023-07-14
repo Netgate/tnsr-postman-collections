@@ -10,7 +10,7 @@ Setup TNSR before the Postman setup:
 starting from TNSR release 23.06
 
 ```
-{
+
     pki generate-restconf-certs length 4096
     restconf
         enable true
@@ -19,7 +19,7 @@ starting from TNSR release 23.06
         global server-key restconf
         server host 0.0.0.0 443 true
     exit
-}
+
 ```
 
 The configuration example above is using Basic Authentication. TNSR also has cert-based authentication which is more secure and can be set up in Postman (out of scope of this document). For more details please refer to this [documentation](https://docs.netgate.com/tnsr/en/latest/recipes/restconf-pki-nacm/index.html). 
@@ -78,7 +78,7 @@ peer_ip - contains the IP address of the peer, used in the body of PUT requests
 
 ![Postman Basic Authentication](Images/postman_basic_auth.png)
 
-9. To send a request press the send button
+9. To send a request press the send buttonsimply
 
 ![Postman send a request](Images/postman_send_request.png)
 
