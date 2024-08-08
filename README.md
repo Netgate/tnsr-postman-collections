@@ -79,7 +79,7 @@ peer_ip - contains the IP address of the peer, used in the body of PUT requests
 
 ![Postman Basic Authentication](Images/postman_basic_auth.png)
 
-9. To send a request press the send buttonsimply
+9. To send a request press the send button
 
 ![Postman send a request](Images/postman_send_request.png)
 
