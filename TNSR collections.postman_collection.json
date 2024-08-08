@@ -1,29 +1,31 @@
 {
 	"info": {
-		"_postman_id": "44d1a438-4064-42da-bcaf-98db9c2349d1",
+		"_postman_id": "7e481493-9c7c-4a62-8d5e-3d1f47f1ead9",
 		"name": "TNSR collections",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27730359",
-		"_collection_link": "https://winter-shuttle-425845.postman.co/workspace/My-Workspace~e7ffb354-8e14-4af4-8627-f2821ddb3490/collection/27730359-44d1a438-4064-42da-bcaf-98db9c2349d1?action=share&creator=27730359&source=collection_link"
+		"_exporter_id": "27730359"
 	},
 	"item": [
 		{
 			"name": "ACL (host)",
 			"item": [
 				{
-					"name": "get ACL (host) config",
+					"name": "return ACL (host) config",
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -57,19 +59,74 @@
 					"response": []
 				},
 				{
-					"name": "put ACL (host) config",
+					"name": "create ACL (host) config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-host-acl:security\": {\n    \"netgate-host-acl:host-acls\": {\n      \"netgate-host-acl:host-acl\": [\n        {\n          \"netgate-host-acl:acl-seq\": 0,\n          \"netgate-host-acl:acl-rule\": [\n            {\n              \"netgate-host-acl:rule-seq\": 0,\n              \"netgate-host-acl:action\": \"permit\",\n              \"netgate-host-acl:description\": \"string\",\n              \"netgate-host-acl:packet-match\": {\n                \"netgate-host-acl:link\": {\n                  \"netgate-host-acl:destination\": \"string\",\n                  \"netgate-host-acl:source\": \"string\"\n                },\n                \"netgate-host-acl:input-if\": \"string\",\n                \"netgate-host-acl:ip\": {\n                  \"netgate-host-acl:destination\": \"string\",\n                  \"netgate-host-acl:protocol\": \"string\",\n                  \"netgate-host-acl:transport\": {},\n                  \"netgate-host-acl:source\": \"string\",\n                  \"netgate-host-acl:version\": 0\n                }\n              }\n            }\n          ],\n          \"netgate-host-acl:description\": \"string\",\n          \"netgate-host-acl:acl-name\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-acl:host-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-acl:host-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update ACL (host) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -105,26 +162,279 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "ACL (standart)",
-			"item": [
+				},
 				{
-					"name": "get ACL (standart) config",
+					"name": "remove ACL (host) config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-acl:host-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-acl:host-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACL (MACIP)",
+			"item": [
+				{
+					"name": "return ACL (MACIP) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-macip:macip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-macip:macip-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create ACL (MACIP) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-macip:macip-table\": {\n    \"netgate-macip:macip-list\": [\n      {\n        \"netgate-macip:macip-name\": \"string\",\n        \"netgate-macip:macip-description\": \"string\",\n        \"netgate-macip:macip-rules\": {\n          \"netgate-macip:macip-rule\": [\n            {\n              \"netgate-macip:mac-address\": \"string\",\n              \"netgate-macip:sequence\": 0,\n              \"netgate-macip:mac-mask\": \"string\",\n              \"netgate-macip:action\": \"deny\",\n              \"netgate-macip:macip-rule-description\": \"string\",\n              \"netgate-macip:ip-prefix\": \"string\",\n              \"netgate-macip:ip-version\": \"unknown\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-macip:macip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-macip:macip-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update ACL (MACIP) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-macip:macip-config\": {\n    \"netgate-macip:macip-table\": {\n      \"netgate-macip:macip-list\": [\n        {\n          \"netgate-macip:macip-name\": \"string\",\n          \"netgate-macip:macip-description\": \"string\",\n          \"netgate-macip:macip-rules\": {\n            \"netgate-macip:macip-rule\": [\n              {\n                \"netgate-macip:mac-address\": \"string\",\n                \"netgate-macip:sequence\": 0,\n                \"netgate-macip:mac-mask\": \"string\",\n                \"netgate-macip:action\": \"deny\",\n                \"netgate-macip:macip-rule-description\": \"string\",\n                \"netgate-macip:ip-prefix\": \"string\",\n                \"netgate-macip:ip-version\": \"unknown\"\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-macip:macip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-macip:macip-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove ACL (MACIP) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-macip:macip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-macip:macip-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACL (standard)",
+			"item": [
+				{
+					"name": "get ACL (standard) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -158,19 +468,74 @@
 					"response": []
 				},
 				{
-					"name": "put ACL (standart) config",
+					"name": "create ACL (standard) config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-acl:acl-table\": {\n    \"netgate-acl:acl-list\": [\n      {\n        \"netgate-acl:acl-name\": \"string\",\n        \"netgate-acl:acl-rules\": {\n          \"netgate-acl:acl-rule\": [\n            {\n              \"netgate-acl:src-last-port\": 0,\n              \"netgate-acl:icmp-first-code\": 0,\n              \"netgate-acl:icmp-last-code\": 0,\n              \"netgate-acl:acl-rule-description\": \"string\",\n              \"netgate-acl:icmp-first-type\": 0,\n              \"netgate-acl:tcp-flags-mask\": 0,\n              \"netgate-acl:ip-version\": \"unknown\",\n              \"netgate-acl:src-first-port\": 0,\n              \"netgate-acl:sequence\": 0,\n              \"netgate-acl:protocol\": \"string\",\n              \"netgate-acl:dst-last-port\": 0,\n              \"netgate-acl:dst-ip-prefix\": \"string\",\n              \"netgate-acl:action\": \"deny\",\n              \"netgate-acl:tcp-flags-value\": 0,\n              \"netgate-acl:src-ip-prefix\": \"string\",\n              \"netgate-acl:icmp-last-type\": 0,\n              \"netgate-acl:dst-first-port\": 0\n            }\n          ]\n        },\n        \"netgate-acl:acl-description\": \"string\"\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-acl:acl-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update ACL (standard) config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -208,24 +573,24 @@
 					"response": []
 				},
 				{
-					"name": "get ACL (standart) table",
+					"name": "remove ACL (standard) config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -239,7 +604,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config/acl-table",
+							"raw": "https://{{host}}/restconf/data/netgate-acl:acl-config",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -247,8 +612,7 @@
 							"path": [
 								"restconf",
 								"data",
-								"netgate-acl:acl-config",
-								"acl-table"
+								"netgate-acl:acl-config"
 							]
 						}
 					},
@@ -260,115 +624,19 @@
 			"name": "BFD",
 			"item": [
 				{
-					"name": "get BFD config",
+					"name": "return BFD table config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/yang-data+json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"netgate-bfd:bfd-config"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "post bfd config",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "tnsr-default",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "tnsr",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/yang-data+json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/yang-data+json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"netgate-bfd:bfd-config\": {\n        \"key-table\": {\n            \"key-entry\": [\n                {\n                    \"conf-key-id\": 123456789,\n                    \"type\": \"meticulous-keyed-sha1\",\n                    \"secret\": \"4a40369b4df32ed0652b548400\"\n                }\n            ]\n        },\n        \"bfd-table\": {\n            \"bfd-session\": [\n                {\n                    \"name\": \"R1_R2\",\n                    \"interface\": \"GigabitEthernet0/4/0\",\n                    \"local-ip-address\": \"10.1.1.1\",\n                    \"peer-ip-address\": \"10.1.1.2\",\n                    \"desired-min-tx\": 1000000,\n                    \"required-min-rx\": 1000000,\n                    \"detect-multiplier\": 3,\n                    \"bfd-key-id\": 123,\n                    \"conf-key-id\": 123456789,\n                    \"enable\": true,\n                    \"delayed\": true\n                }\n            ]\n        }\n    }\n}"
-						},
-						"url": {
-							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config",
-							"protocol": "https",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"restconf",
-								"data",
-								"netgate-bfd:bfd-config"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get BFD table config",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "tnsr-default",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "tnsr",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -403,19 +671,75 @@
 					"response": []
 				},
 				{
-					"name": "post BFD table config",
+					"name": "create BFD table config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bfd:bfd-session\": [\n    {\n      \"netgate-bfd:detect-multiplier\": 0,\n      \"netgate-bfd:peer-ip-address\": \"string\",\n      \"netgate-bfd:enable\": true,\n      \"netgate-bfd:local-ip-address\": \"string\",\n      \"netgate-bfd:name\": \"string\",\n      \"netgate-bfd:required-min-rx\": 0,\n      \"netgate-bfd:desired-min-tx\": 0,\n      \"netgate-bfd:delayed\": true,\n      \"netgate-bfd:bfd-key-id\": 0,\n      \"netgate-bfd:conf-key-id\": 0,\n      \"netgate-bfd:interface\": \"string\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/bfd-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"bfd-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update BFD table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -452,12 +776,345 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "remove BFD table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/bfd-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"bfd-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return BFD key table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/key-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"key-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create BFD key table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bfd:key-entry\": [\n    {\n      \"netgate-bfd:type\": \"keyed-sha1\",\n      \"netgate-bfd:conf-key-id\": 0,\n      \"netgate-bfd:secret\": \"string\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/key-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"key-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update BFD key table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bfd:key-table\": {\n    \"netgate-bfd:key-entry\": [\n      {\n        \"netgate-bfd:type\": \"keyed-sha1\",\n        \"netgate-bfd:conf-key-id\": 0,\n        \"netgate-bfd:secret\": \"string\"\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/key-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"key-table"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove BFD key table config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-bfd:bfd-config/key-table",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-bfd:bfd-config",
+								"key-table"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "BGP",
 			"item": [
+				{
+					"name": "BGP status",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.response.json())"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-bgp:input\": [\n    {\n      \"request\": \"neighbors\",\n      \"family\": \"ipv4\",\n      \"vrf-id\": \"default\"\n    }\n  ]\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-bgp:bgp-show",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-bgp:bgp-show"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "BGP clear",
 					"request": {
@@ -466,12 +1123,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "tnsr",
+									"value": "username",
 									"type": "string"
 								}
 							]
@@ -507,39 +1164,274 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Configuration History",
+			"item": [
 				{
-					"name": "BGP status",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"console.log(pm.response.json())"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"strictSSL": false
-					},
+					"name": "return configuration history config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-conf-history:conf-history-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-conf-history:conf-history-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create configuration history config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-conf-history:conf-history-config\": {\n    \"version-history-config\": {\n      \"conf-history-autosave-period\": 0,\n      \"conf-history-enabled\": true\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-conf-history:conf-history-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-conf-history:conf-history-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update configuration history config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-conf-history:conf-history-config\": {\n      \"version-history-config\": {\n        \"conf-history-autosave-period\": 1,\n        \"conf-history-enabled\": true\n      }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-conf-history:conf-history-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-conf-history:conf-history-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove configuration history config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-conf-history:conf-history-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-conf-history:conf-history-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuration  Rollback",
+			"item": [
+				{
+					"name": "Configuration Rollback show timer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-conf-rollback:conf-rollback-show-timer",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-conf-rollback:conf-rollback-show-timer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration Rollback start timer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -564,7 +1456,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"netgate-bgp:input\": [\n    {\n      \"request\": \"neighbors\",\n      \"family\": \"ipv4\",\n      \"vrf-id\": \"default\"\n    }\n  ]\n}",
+							"raw": "{\n  \"input\": {\n    \"netgate-conf-rollback:config-source\": {\n      \"netgate-conf-rollback:running\": \"string\",\n      \"netgate-conf-rollback:startup\": \"string\",\n      \"netgate-conf-rollback:filename\": \"string\"\n    },\n    \"netgate-conf-rollback:time\": {\n      \"netgate-conf-rollback:minutes\": 0\n    }\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -572,7 +1464,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/operations/netgate-bgp:bgp-show",
+							"raw": "https://{{host}}/restconf/operations/netgate-conf-rollback:conf-rollback-start-timer",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -580,7 +1472,154 @@
 							"path": [
 								"restconf",
 								"operations",
-								"netgate-bgp:bgp-show"
+								"netgate-conf-rollback:conf-rollback-start-timer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration Rollback restart timer",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"input\": {\n    \"netgate-conf-rollback:time\": {\n      \"netgate-conf-rollback:minutes\": 0\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-conf-rollback:conf-rollback-restart-timer",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-conf-rollback:conf-rollback-restart-timer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration Rollback cancel",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-conf-rollback:conf-rollback-cancel",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-conf-rollback:conf-rollback-cancel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Configuration Rollback trigger",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-conf-rollback:conf-rollback-trigger",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-conf-rollback:conf-rollback-trigger"
 							]
 						}
 					},
@@ -589,10 +1628,1268 @@
 			]
 		},
 		{
-			"name": "interface",
+			"name": "Cryptography",
 			"item": [
 				{
-					"name": "get int config ipv4 (single interface)",
+					"name": "return Cryptography config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-crypto:crypto-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-crypto:crypto-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Cryptography config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-crypto:asynchronous\": {\n    \"netgate-crypto:dispatch-mode\": \"adaptive\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-crypto:crypto-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-crypto:crypto-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Cryptography config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-crypto:crypto-config\": {\n    \"netgate-crypto:asynchronous\": {\n      \"netgate-crypto:dispatch-mode\": \"adaptive\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-crypto:crypto-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-crypto:crypto-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Cryptography config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-crypto:crypto-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-crypto:crypto-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dataplane",
+			"item": [
+				{
+					"name": "return Dataplane Ethernet config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/ethernet",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"ethernet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane API segment config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/api-segment",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"api-segment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane Buffers config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/buffers",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"buffers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane Logging config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/logging",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"logging"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane CPU config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/cpu",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"cpu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane DPDK config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/dpdk",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"dpdk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "return Dataplane IP6 config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-dataplane:dataplane-config/ip6",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-dataplane:dataplane-config",
+								"ip6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Graph Nodes",
+			"item": [
+				{
+					"name": "Graph Node get",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"input\": {\n    \"netgate-vpp-graph:flags\": 0,\n    \"netgate-vpp-graph:name\": \"string\",\n    \"netgate-vpp-graph:index\": 0\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-vpp-graph:graph-node-get",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-vpp-graph:graph-node-get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GRE",
+			"item": [
+				{
+					"name": "return GRE config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-gre:gre-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-gre:gre-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create GRE config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-gre:gre-table\": {\n    \"netgate-gre:tunnel\": [\n      {\n        \"netgate-gre:tunnel-type\": \"l3\",\n        \"netgate-gre:instance\": 0,\n        \"netgate-gre:erspan-session-id\": 0,\n        \"netgate-gre:encap-route-table\": \"string\",\n        \"netgate-gre:name\": \"string\",\n        \"netgate-gre:src-ip-address\": \"string\",\n        \"netgate-gre:dst-ip-address\": \"string\"\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-gre:gre-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-gre:gre-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update GRE config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-gre:gre-config\": {\n    \"netgate-gre:gre-table\": {\n      \"netgate-gre:tunnel\": [\n        {\n          \"netgate-gre:tunnel-type\": \"l3\",\n          \"netgate-gre:instance\": 0,\n          \"netgate-gre:erspan-session-id\": 0,\n          \"netgate-gre:encap-route-table\": \"string\",\n          \"netgate-gre:name\": \"string\",\n          \"netgate-gre:src-ip-address\": \"string\",\n          \"netgate-gre:dst-ip-address\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-gre:gre-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-gre:gre-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove GRE config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-gre:gre-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-gre:gre-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Host interface",
+			"item": [
+				{
+					"name": "return Host Interface",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>Error Type</th>",
+									"        <th>Error Tag</th>",
+									"        <th>Error Severity</th>",
+									"        <th>Error Message</th>",
+									"    </tr>",
+									"    <tr>",
+									"        <td>{{response.ietf-restconf:errors.error.error-type}}</td>",
+									"        <td>{{response.ietf-restconf:errors.error.error-tag}}</td>",
+									"        <td>{{response.ietf-restconf:errors.error.error-severity}}</td>",
+									"        <td>{{response.ietf-restconf:errors.error.error-message}}</td>",
+									"    </tr>",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Host Interface",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-host-interface:interface\": [\n    {\n      \"netgate-host-interface:name\": \"string\",\n      \"netgate-host-interface:description\": \"string\",\n      \"netgate-host-interface:ipv4\": {\n        \"netgate-host-interface:dhcp-client\": {\n          \"netgate-host-interface:hostname\": \"string\",\n          \"netgate-host-interface:enabled\": true\n        },\n        \"netgate-host-interface:address\": {\n          \"netgate-host-interface:ip\": [\n            \"string\"\n          ]\n        }\n      },\n      \"netgate-host-interface:ipv6\": {\n        \"netgate-host-interface:dhcp-client\": {\n          \"netgate-host-interface:enabled\": true\n        },\n        \"netgate-host-interface:address\": {\n          \"netgate-host-interface:ip\": [\n            \"string\"\n          ]\n        }\n      },\n      \"netgate-host-interface:enabled\": true,\n      \"netgate-host-interface:mtu\": 0\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Host Interface",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "root1",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "tnsr-default",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"netgate-host-interface:host-if-config\": {\n        \"interface\": [\n            {\n                \"name\": \"enp1s0\",\n                \"description\": \"descpription\",\n                \"enabled\": true,\n                \"ipv4\": {\n                    \"dhcp-client\": {\n                        \"enabled\": true\n                    }\n                }\n            }\n        ]\n    }\n}"
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Host Interface",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-interface:host-if-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Host Route",
+			"item": [
+				{
+					"name": "return Host Route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-route:host-route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-route:host-route-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Host Route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-host-route:route-tables\": {\n    \"netgate-host-route:route-table\": [\n      {\n        \"netgate-host-route:name\": \"string\",\n        \"netgate-host-route:description\": \"string\",\n        \"netgate-host-route:static-routes\": {\n          \"netgate-host-route:interfaces\": {\n            \"netgate-host-route:interface\": [\n              {\n                \"netgate-host-route:if-name\": \"string\",\n                \"netgate-host-route:ipv4-routes\": {\n                  \"netgate-host-route:route\": [\n                    null\n                  ]\n                },\n                \"netgate-host-route:ipv6-routes\": {\n                  \"netgate-host-route:route\": [\n                    null\n                  ]\n                }\n              }\n            ]\n          }\n        }\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-route:host-route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-route:host-route-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Host Route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-host-route:host-route-config\": {\n    \"netgate-host-route:route-tables\": {\n      \"netgate-host-route:route-table\": [\n        {\n          \"netgate-host-route:name\": \"string\",\n          \"netgate-host-route:description\": \"string\",\n          \"netgate-host-route:static-routes\": {\n            \"netgate-host-route:interfaces\": {\n              \"netgate-host-route:interface\": [\n                {\n                  \"netgate-host-route:if-name\": \"string\",\n                  \"netgate-host-route:ipv4-routes\": {\n                    \"netgate-host-route:route\": []\n                  },\n                  \"netgate-host-route:ipv6-routes\": {\n                    \"netgate-host-route:route\": []\n                  }\n                }\n              ]\n            }\n          }\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-route:host-route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-route:host-route-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Host Route config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-host-route:host-route-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-host-route:host-route-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interface",
+			"item": [
+				{
+					"name": "return Interface config IPv4",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true,
 						"strictSSL": false
@@ -602,13 +2899,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "tnsr-default",
+									"key": "username",
+									"value": "tnsr",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "tnsr",
+									"key": "password",
+									"value": "tnsr-default!",
 									"type": "string"
 								}
 							]
@@ -649,7 +2946,7 @@
 					"response": []
 				},
 				{
-					"name": "put int config ipv4 (single interface)",
+					"name": "create/update Interface config IPv4",
 					"protocolProfileBehavior": {
 						"strictSSL": false
 					},
@@ -659,7 +2956,7 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -710,7 +3007,7 @@
 					"response": []
 				},
 				{
-					"name": "get int config ipv6 (single int)",
+					"name": "return Interface config IPv6",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -766,7 +3063,7 @@
 					"response": []
 				},
 				{
-					"name": "put int config ipv6 (single interface)",
+					"name": "create/update Interface config IPv6",
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -819,19 +3116,19 @@
 					"response": []
 				},
 				{
-					"name": "get interface state",
+					"name": "return Interface state",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "tnsr-default",
+									"key": "username",
+									"value": "root1",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "tnsr",
+									"key": "password",
+									"value": "tnsr-default",
 									"type": "string"
 								}
 							]
@@ -867,17 +3164,17 @@
 			]
 		},
 		{
-			"name": "Host interface",
+			"name": "IP",
 			"item": [
 				{
-					"name": "get host interface",
+					"name": "return IP config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -901,7 +3198,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"raw": "https://{{host}}/restconf/data/netgate-ip:ip-config",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -909,21 +3206,76 @@
 							"path": [
 								"restconf",
 								"data",
-								"netgate-host-interface:host-if-config"
+								"netgate-ip:ip-config"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "put host interface",
+					"name": "create IP config",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ip:reassembly\": {\n    \"netgate-ip:virtual\": {\n      \"netgate-ip:ipv4\": {\n        \"netgate-ip:max-reassemblies\": 0,\n        \"netgate-ip:timeout-ms\": 0,\n        \"netgate-ip:max-reassembly-length\": 0,\n        \"netgate-ip:expire-walk-interval-ms\": 0\n      },\n      \"netgate-ip:ipv6\": {\n        \"netgate-ip:max-reassemblies\": 0,\n        \"netgate-ip:timeout-ms\": 0,\n        \"netgate-ip:max-reassembly-length\": 0,\n        \"netgate-ip:expire-walk-interval-ms\": 0\n      }\n    },\n    \"netgate-ip:full\": {\n      \"netgate-ip:ipv4\": {\n        \"netgate-ip:max-reassemblies\": 0,\n        \"netgate-ip:timeout-ms\": 0,\n        \"netgate-ip:max-reassembly-length\": 0,\n        \"netgate-ip:expire-walk-interval-ms\": 0\n      },\n      \"netgate-ip:ipv6\": {\n        \"netgate-ip:max-reassemblies\": 0,\n        \"netgate-ip:timeout-ms\": 0,\n        \"netgate-ip:max-reassembly-length\": 0,\n        \"netgate-ip:expire-walk-interval-ms\": 0\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ip:ip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ip:ip-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update IP config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -948,10 +3300,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"netgate-host-interface:host-if-config\": {\n        \"interface\": [\n            {\n                \"name\": \"enp1s0\",\n                \"description\": \"descpription\",\n                \"enabled\": true,\n                \"ipv4\": {\n                    \"dhcp-client\": {\n                        \"enabled\": true\n                    }\n                }\n            }\n        ]\n    }\n}"
+							"raw": "{\n  \"netgate-ip:ip-config\": {\n    \"netgate-ip:reassembly\": {\n      \"netgate-ip:virtual\": {\n        \"netgate-ip:ipv4\": {\n          \"netgate-ip:max-reassemblies\": 0,\n          \"netgate-ip:timeout-ms\": 0,\n          \"netgate-ip:max-reassembly-length\": 0,\n          \"netgate-ip:expire-walk-interval-ms\": 0\n        },\n        \"netgate-ip:ipv6\": {\n          \"netgate-ip:max-reassemblies\": 0,\n          \"netgate-ip:timeout-ms\": 0,\n          \"netgate-ip:max-reassembly-length\": 0,\n          \"netgate-ip:expire-walk-interval-ms\": 0\n        }\n      },\n      \"netgate-ip:full\": {\n        \"netgate-ip:ipv4\": {\n          \"netgate-ip:max-reassemblies\": 0,\n          \"netgate-ip:timeout-ms\": 0,\n          \"netgate-ip:max-reassembly-length\": 0,\n          \"netgate-ip:expire-walk-interval-ms\": 0\n        },\n        \"netgate-ip:ipv6\": {\n          \"netgate-ip:max-reassemblies\": 0,\n          \"netgate-ip:timeout-ms\": 0,\n          \"netgate-ip:max-reassembly-length\": 0,\n          \"netgate-ip:expire-walk-interval-ms\": 0\n        }\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "https://{{host}}/restconf/data/netgate-host-interface:host-if-config",
+							"raw": "https://{{host}}/restconf/data/netgate-ip:ip-config",
 							"protocol": "https",
 							"host": [
 								"{{host}}"
@@ -959,7 +3316,1471 @@
 							"path": [
 								"restconf",
 								"data",
-								"netgate-host-interface:host-if-config"
+								"netgate-ip:ip-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ip:ip-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ip:ip-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IPFIX",
+			"item": [
+				{
+					"name": "return IPFIX config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/ietf-ipfix-psamp:ipfix",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"ietf-ipfix-psamp:ipfix"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IPsec",
+			"item": [
+				{
+					"name": "return IPsec config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create IPsec Global Options config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ipsec:eap-radius\": {\n    \"netgate-ipsec:server-group\": \"string\",\n    \"netgate-ipsec:accounting\": {\n      \"netgate-ipsec:interim-interval\": 0,\n      \"netgate-ipsec:enabled\": true\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config/global-options",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"global-options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update IPsec Global Options config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ipsec:global-options\": {\n    \"netgate-ipsec:eap-radius\": {\n      \"netgate-ipsec:server-group\": \"string\",\n      \"netgate-ipsec:accounting\": {\n        \"netgate-ipsec:interim-interval\": 0,\n        \"netgate-ipsec:enabled\": true\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config/global-options",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"global-options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove IPsec Global Options config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config/global-options",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"global-options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create IPsec Tunnel config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ipsec:remote-type\": \"gateway\",\n  \"netgate-ipsec:tunnel-type\": \"interface\",\n  \"netgate-ipsec:instance\": 0,\n  \"netgate-ipsec:tunnel-enable\": false,\n  \"netgate-ipsec:crypto\": {\n    \"netgate-ipsec:manual\": {\n      \"netgate-ipsec:encryption\": {\n        \"netgate-ipsec:key\": \"string\",\n        \"netgate-ipsec:algorithm\": \"aes128gcm16\"\n      },\n      \"netgate-ipsec:protocol\": \"esp\",\n      \"netgate-ipsec:integrity\": {\n        \"netgate-ipsec:key\": \"string\",\n        \"netgate-ipsec:algorithm\": \"sha1\"\n      }\n    },\n    \"netgate-ipsec:ike\": {\n      \"netgate-ipsec:role\": \"initiator-only\",\n      \"netgate-ipsec:udp-encapsulation\": false,\n      \"netgate-ipsec:unique-id-policy\": \"never\",\n      \"netgate-ipsec:lifetime\": 14400,\n      \"netgate-ipsec:mobike\": \"string\",\n      \"netgate-ipsec:remote-access\": {\n        \"netgate-ipsec:dns\": {\n          \"netgate-ipsec:resolver\": [\n            {\n              \"netgate-ipsec:res-number\": 0,\n              \"netgate-ipsec:address\": \"string\"\n            }\n          ]\n        },\n        \"netgate-ipsec:address-pools\": {\n          \"netgate-ipsec:radius\": \"string\",\n          \"netgate-ipsec:ipv4-range\": {\n            \"netgate-ipsec:first-address\": \"string\",\n            \"netgate-ipsec:last-address\": \"string\"\n          },\n          \"netgate-ipsec:ipv6-range\": {\n            \"netgate-ipsec:first-address\": \"string\",\n            \"netgate-ipsec:last-address\": \"string\"\n          }\n        }\n      },\n      \"netgate-ipsec:dpd-poll-interval\": 0,\n      \"netgate-ipsec:version\": 2,\n      \"netgate-ipsec:key-renewal\": \"reauth\",\n      \"netgate-ipsec:child-sa\": [\n        {\n          \"netgate-ipsec:proposal\": [\n            {\n              \"netgate-ipsec:name\": \"string\",\n              \"netgate-ipsec:sequence-number\": \"esn\",\n              \"netgate-ipsec:encryption-algorithm\": \"aes128gcm16\",\n              \"netgate-ipsec:dh-group\": \"modp768\",\n              \"netgate-ipsec:integrity-algorithm\": \"sha1\"\n            }\n          ],\n          \"netgate-ipsec:mode\": \"tunnel\",\n          \"netgate-ipsec:protocol\": \"esp\",\n          \"netgate-ipsec:lifetime\": 3600,\n          \"netgate-ipsec:name\": \"string\",\n          \"netgate-ipsec:traffic-selector\": [\n            {\n              \"netgate-ipsec:ts-number\": 0,\n              \"netgate-ipsec:local\": \"string\"\n            }\n          ],\n          \"netgate-ipsec:replay-window\": 0\n        }\n      ],\n      \"netgate-ipsec:identity\": [\n        {\n          \"netgate-ipsec:type\": \"none\",\n          \"netgate-ipsec:value\": \"string\",\n          \"netgate-ipsec:peer\": \"remote\"\n        }\n      ],\n      \"netgate-ipsec:proposals\": [\n        {\n          \"netgate-ipsec:name\": \"string\",\n          \"netgate-ipsec:encryption-algorithm\": \"aes128\",\n          \"netgate-ipsec:prf\": \"prfsha1\",\n          \"netgate-ipsec:dh-group\": \"modp768\",\n          \"netgate-ipsec:integrity-algorithm\": \"sha1\"\n        }\n      ],\n      \"netgate-ipsec:authentication\": [\n        {\n          \"netgate-ipsec:round\": [\n            {\n              \"netgate-ipsec:certificate\": \"string\",\n              \"netgate-ipsec:number\": 0,\n              \"netgate-ipsec:eap-radius\": \"string\",\n              \"netgate-ipsec:psk\": \"string\",\n              \"netgate-ipsec:eap-tls-ca-certificate\": \"string\",\n              \"netgate-ipsec:ca-certificate\": \"string\"\n            }\n          ],\n          \"netgate-ipsec:peer\": \"remote\"\n        }\n      ]\n    },\n    \"netgate-ipsec:config-type\": \"ike\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config/tunnel",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"tunnel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update IPsec Tunnel config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ipsec:tunnel\": {\n    \"netgate-ipsec:remote-type\": \"gateway\",\n    \"netgate-ipsec:tunnel-type\": \"interface\",\n    \"netgate-ipsec:instance\": 0,\n    \"netgate-ipsec:tunnel-enable\": false,\n    \"netgate-ipsec:crypto\": {\n      \"netgate-ipsec:manual\": {\n        \"netgate-ipsec:encryption\": {\n          \"netgate-ipsec:key\": \"string\",\n          \"netgate-ipsec:algorithm\": \"aes128gcm16\"\n        },\n        \"netgate-ipsec:protocol\": \"esp\",\n        \"netgate-ipsec:integrity\": {\n          \"netgate-ipsec:key\": \"string\",\n          \"netgate-ipsec:algorithm\": \"sha1\"\n        }\n      },\n      \"netgate-ipsec:ike\": {\n        \"netgate-ipsec:role\": \"initiator-only\",\n        \"netgate-ipsec:udp-encapsulation\": false,\n        \"netgate-ipsec:unique-id-policy\": \"never\",\n        \"netgate-ipsec:lifetime\": 14400,\n        \"netgate-ipsec:mobike\": \"string\",\n        \"netgate-ipsec:remote-access\": {\n          \"netgate-ipsec:dns\": {\n            \"netgate-ipsec:resolver\": [\n              {\n                \"netgate-ipsec:res-number\": 0,\n                \"netgate-ipsec:address\": \"string\"\n              }\n            ]\n          },\n          \"netgate-ipsec:address-pools\": {\n            \"netgate-ipsec:radius\": \"string\",\n            \"netgate-ipsec:ipv4-range\": {\n              \"netgate-ipsec:first-address\": \"string\",\n              \"netgate-ipsec:last-address\": \"string\"\n            },\n            \"netgate-ipsec:ipv6-range\": {\n              \"netgate-ipsec:first-address\": \"string\",\n              \"netgate-ipsec:last-address\": \"string\"\n            }\n          }\n        },\n        \"netgate-ipsec:dpd-poll-interval\": 0,\n        \"netgate-ipsec:version\": 2,\n        \"netgate-ipsec:key-renewal\": \"reauth\",\n        \"netgate-ipsec:child-sa\": [\n          {\n            \"netgate-ipsec:proposal\": [\n              {\n                \"netgate-ipsec:name\": \"string\",\n                \"netgate-ipsec:sequence-number\": \"esn\",\n                \"netgate-ipsec:encryption-algorithm\": \"aes128gcm16\",\n                \"netgate-ipsec:dh-group\": \"modp768\",\n                \"netgate-ipsec:integrity-algorithm\": \"sha1\"\n              }\n            ],\n            \"netgate-ipsec:mode\": \"tunnel\",\n            \"netgate-ipsec:protocol\": \"esp\",\n            \"netgate-ipsec:lifetime\": 3600,\n            \"netgate-ipsec:name\": \"string\",\n            \"netgate-ipsec:traffic-selector\": [\n              {\n                \"netgate-ipsec:ts-number\": 0,\n                \"netgate-ipsec:local\": \"string\"\n              }\n            ],\n            \"netgate-ipsec:replay-window\": 0\n          }\n        ],\n        \"netgate-ipsec:identity\": [\n          {\n            \"netgate-ipsec:type\": \"none\",\n            \"netgate-ipsec:value\": \"string\",\n            \"netgate-ipsec:peer\": \"remote\"\n          }\n        ],\n        \"netgate-ipsec:proposals\": [\n          {\n            \"netgate-ipsec:name\": \"string\",\n            \"netgate-ipsec:encryption-algorithm\": \"aes128\",\n            \"netgate-ipsec:prf\": \"prfsha1\",\n            \"netgate-ipsec:dh-group\": \"modp768\",\n            \"netgate-ipsec:integrity-algorithm\": \"sha1\"\n          }\n        ],\n        \"netgate-ipsec:authentication\": [\n          {\n            \"netgate-ipsec:round\": [\n              {\n                \"netgate-ipsec:certificate\": \"string\",\n                \"netgate-ipsec:number\": 0,\n                \"netgate-ipsec:eap-radius\": \"string\",\n                \"netgate-ipsec:psk\": \"string\",\n                \"netgate-ipsec:eap-tls-ca-certificate\": \"string\",\n                \"netgate-ipsec:ca-certificate\": \"string\"\n              }\n            ],\n            \"netgate-ipsec:peer\": \"remote\"\n          }\n        ]\n      },\n      \"netgate-ipsec:config-type\": \"ike\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://hostname/restconf/data/netgate-ipsec:ipsec-config/tunnel={instance}",
+							"protocol": "https",
+							"host": [
+								"hostname"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"tunnel={instance}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete IPsec Tunnel config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ipsec:ipsec-config/tunnel={instance}",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ipsec:ipsec-config",
+								"tunnel={instance}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ldap",
+			"item": [
+				{
+					"name": "return Ldap config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ldap:ldap-client",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ldap:ldap-client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Ldap config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ldap:client\": {\n    \"netgate-ldap:bind-password\": \"string\",\n    \"netgate-ldap:bind-dn\": \"string\",\n    \"netgate-ldap:servers\": [\n      {\n        \"netgate-ldap:name\": \"string\",\n        \"netgate-ldap:server\": {\n          \"netgate-ldap:host\": \"string\",\n          \"netgate-ldap:port\": 0\n        }\n      }\n    ],\n    \"netgate-ldap:group-dn\": \"string\",\n    \"netgate-ldap:scope\": \"sub\",\n    \"netgate-ldap:attributes\": {\n      \"netgate-ldap:overrides\": [\n        {\n          \"netgate-ldap:value\": \"string\",\n          \"netgate-ldap:attribute\": \"userPassword\"\n        }\n      ]\n    },\n    \"netgate-ldap:transport\": \"tcp\",\n    \"netgate-ldap:version\": 0,\n    \"netgate-ldap:base-dn\": \"string\",\n    \"netgate-ldap:peer-ca\": \"string\",\n    \"netgate-ldap:timeout\": 0\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ldap:ldap-client",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ldap:ldap-client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Ldap config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-ldap:ldap-client\": {\n    \"netgate-ldap:client\": {\n      \"netgate-ldap:bind-password\": \"string\",\n      \"netgate-ldap:bind-dn\": \"string\",\n      \"netgate-ldap:servers\": [\n        {\n          \"netgate-ldap:name\": \"string\",\n          \"netgate-ldap:server\": {\n            \"netgate-ldap:host\": \"string\",\n            \"netgate-ldap:port\": 0\n          }\n        }\n      ],\n      \"netgate-ldap:group-dn\": \"string\",\n      \"netgate-ldap:scope\": \"sub\",\n      \"netgate-ldap:attributes\": {\n        \"netgate-ldap:overrides\": [\n          {\n            \"netgate-ldap:value\": \"string\",\n            \"netgate-ldap:attribute\": \"userPassword\"\n          }\n        ]\n      },\n      \"netgate-ldap:transport\": \"tcp\",\n      \"netgate-ldap:version\": 0,\n      \"netgate-ldap:base-dn\": \"string\",\n      \"netgate-ldap:peer-ca\": \"string\",\n      \"netgate-ldap:timeout\": 0\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ldap:ldap-client",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ldap:ldap-client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Ldap config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-ldap:ldap-client",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-ldap:ldap-client"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LLDP",
+			"item": [
+				{
+					"name": "return LLDP config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-lldp:lldp-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-lldp:lldp-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create LLDP config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-lldp:system-name\": \"string\",\n  \"netgate-lldp:tx-interval\": 0,\n  \"netgate-lldp:tx-hold\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-lldp:lldp-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-lldp:lldp-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update LLDP config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-lldp:lldp-config\": {\n    \"netgate-lldp:system-name\": \"string\",\n    \"netgate-lldp:tx-interval\": 0,\n    \"netgate-lldp:tx-hold\": 0\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-lldp:lldp-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-lldp:lldp-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove LLDP confg",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-lldp:lldp-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-lldp:lldp-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logging",
+			"item": [
+				{
+					"name": "return Logging config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-logging:logging-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-logging:logging-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Logging config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-logging:remote-servers\": {\n    \"netgate-logging:remote-server\": [\n      {\n        \"netgate-logging:filter\": [\n          {\n            \"netgate-logging:priority\": \"emerg\",\n            \"netgate-logging:facility\": \"string\"\n          }\n        ],\n        \"netgate-logging:name\": \"string\",\n        \"netgate-logging:description\": \"string\",\n        \"netgate-logging:address\": \"string\",\n        \"netgate-logging:transport-protocol\": \"udp\",\n        \"netgate-logging:port\": 0\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-logging:logging-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-logging:logging-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Logging config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-logging:logging-config\": {\n    \"netgate-logging:remote-servers\": {\n      \"netgate-logging:remote-server\": [\n        {\n          \"netgate-logging:filter\": [\n            {\n              \"netgate-logging:priority\": \"emerg\",\n              \"netgate-logging:facility\": \"string\"\n            }\n          ],\n          \"netgate-logging:name\": \"string\",\n          \"netgate-logging:description\": \"string\",\n          \"netgate-logging:address\": \"string\",\n          \"netgate-logging:transport-protocol\": \"udp\",\n          \"netgate-logging:port\": 0\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-logging:logging-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-logging:logging-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Logging config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-logging:logging-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-logging:logging-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master",
+			"item": [
+				{
+					"name": "Backend coredump",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"input\": {\n    \"netgate-master:operation\": \"enable\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-master:backend-coredump",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-master:backend-coredump"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show CLI",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"input\": {\n    \"netgate-master:database\": \"running\",\n    \"netgate-master:indent\": true,\n    \"netgate-master:operation\": \"list-plugins\",\n    \"netgate-master:module\": \"string\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-master:cli-show-cli",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-master:cli-show-cli"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restconf coredump",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"input\": {\n    \"netgate-master:operation\": \"enable\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/operations/netgate-master:restconf-coredump",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"operations",
+								"netgate-master:restconf-coredump"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Neighbor",
+			"item": [
+				{
+					"name": "return Neighbor config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-neighbor:neighbor-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-neighbor:neighbor-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Neighbor config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-neighbor:neighbor-table\": {\n    \"netgate-neighbor:interface\": [\n      {\n        \"netgate-neighbor:if-name\": \"string\",\n        \"netgate-neighbor:neighbors\": {\n          \"netgate-neighbor:neighbor-entry\": [\n            {\n              \"netgate-neighbor:mac-address\": \"string\",\n              \"netgate-neighbor:ip-address\": \"string\",\n              \"netgate-neighbor:is-no-route-table-entry\": true\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"netgate-neighbor:neighbor-cache-options\": {\n    \"netgate-neighbor:ipv4\": {\n      \"netgate-neighbor:max-age\": 300,\n      \"netgate-neighbor:max-number\": 50000\n    },\n    \"netgate-neighbor:ipv6\": {\n      \"netgate-neighbor:max-age\": 300,\n      \"netgate-neighbor:max-number\": 50000\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-neighbor:neighbor-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-neighbor:neighbor-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update Neighbor config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-neighbor:neighbor-config\": {\n    \"netgate-neighbor:neighbor-table\": {\n      \"netgate-neighbor:interface\": [\n        {\n          \"netgate-neighbor:if-name\": \"string\",\n          \"netgate-neighbor:neighbors\": {\n            \"netgate-neighbor:neighbor-entry\": [\n              {\n                \"netgate-neighbor:mac-address\": \"string\",\n                \"netgate-neighbor:ip-address\": \"string\",\n                \"netgate-neighbor:is-no-route-table-entry\": true\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"netgate-neighbor:neighbor-cache-options\": {\n      \"netgate-neighbor:ipv4\": {\n        \"netgate-neighbor:max-age\": 300,\n        \"netgate-neighbor:max-number\": 50000\n      },\n      \"netgate-neighbor:ipv6\": {\n        \"netgate-neighbor:max-age\": 300,\n        \"netgate-neighbor:max-number\": 50000\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-neighbor:neighbor-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-neighbor:neighbor-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Neighbor config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-neighbor:neighbor-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-neighbor:neighbor-config"
 							]
 						}
 					},
@@ -978,7 +4799,7 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -1088,7 +4909,7 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "tnsr-default",
+									"value": "tnsr-default!",
 									"type": "string"
 								},
 								{
@@ -1272,6 +5093,264 @@
 								"restconf",
 								"data",
 								"netgate-route-table:route-table-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tunnel",
+			"item": [
+				{
+					"name": "return Tunnel config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-tunnel:tunnels-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-tunnel:tunnels-config"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VXLAN",
+			"item": [
+				{
+					"name": "return VXLAN config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-vxlan:vxlan-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-vxlan:vxlan-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create VXLAN config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-vxlan:vxlan-table\": {\n    \"netgate-vxlan:tunnel\": [\n      {\n        \"netgate-vxlan:vni\": 0,\n        \"netgate-vxlan:instance\": 0,\n        \"netgate-vxlan:encap-route-table\": \"string\",\n        \"netgate-vxlan:name\": \"string\",\n        \"netgate-vxlan:mcast-if-name\": \"string\",\n        \"netgate-vxlan:src-ip-address\": \"string\",\n        \"netgate-vxlan:dst-ip-address\": \"string\"\n      }\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-vxlan:vxlan-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-vxlan:vxlan-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create/update VXLAN config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"netgate-vxlan:vxlan-config\": {\n    \"netgate-vxlan:vxlan-table\": {\n      \"netgate-vxlan:tunnel\": [\n        {\n          \"netgate-vxlan:vni\": 0,\n          \"netgate-vxlan:instance\": 0,\n          \"netgate-vxlan:encap-route-table\": \"string\",\n          \"netgate-vxlan:name\": \"string\",\n          \"netgate-vxlan:mcast-if-name\": \"string\",\n          \"netgate-vxlan:src-ip-address\": \"string\",\n          \"netgate-vxlan:dst-ip-address\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-vxlan:vxlan-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-vxlan:vxlan-config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove VXLAN config",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "tnsr-default!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "tnsr",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/yang-data+json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/yang-data+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{host}}/restconf/data/netgate-vxlan:vxlan-config",
+							"protocol": "https",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"restconf",
+								"data",
+								"netgate-vxlan:vxlan-config"
 							]
 						}
 					},
